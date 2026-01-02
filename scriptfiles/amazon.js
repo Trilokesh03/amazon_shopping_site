@@ -40,15 +40,40 @@ products.forEach((item)=>{
 
           <div class="product-spacer"></div>
 
-          <div class="added-to-cart">
+          <div class="added-to-cart ">
             <img src="images/icons/checkmark.png">
             Added
           </div>
 
-          <button class="add-to-cart-button button-primary">
+          <button class="add-to-cart-button button-primary js-add-to-cart" data-product-id="${item.id}">
             Add to Cart
           </button>
         </div>`;
     mainHTML+=html;
 });
+
 document.querySelector('.js-insert-mainHTML').innerHTML=mainHTML;
+document.querySelectorAll('.js-add-to-cart').forEach(
+  (button)=>{
+    button.addEventListener('click',()=>{
+      const prdtId=button.dataset.productId;
+      let ispresent;
+      cart.forEach((item)=>{
+        if(prdtId===item.prdtId)
+            ispresent=item;
+      })
+      if(ispresent){
+        ispresent.count++;
+      }
+      else{
+        cart.push(
+        {prdtId:prdtId,
+          count:1
+        }
+      )
+      }
+      
+      console.log(cart);
+    })
+  }
+);  
