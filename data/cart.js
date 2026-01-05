@@ -1,4 +1,4 @@
-export const cart=[
+export let cart=[
   {
     prdtId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
     count:2
@@ -25,4 +25,12 @@ export function addtocart(prdtId){
         }
       )
       }
+}
+export function removeProduct(productId){
+  const temp=[];
+  cart.forEach((product)=>{
+    if(product.prdtId !== productId)
+        temp.push(product);
+  });
+  cart=temp;
 }
