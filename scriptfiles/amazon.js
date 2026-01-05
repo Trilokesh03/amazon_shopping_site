@@ -1,5 +1,6 @@
 import {cart,addtocart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import { formatCurrency } from './utils/convertmoney.js';
 let mainHTML='';
 products.forEach((item)=>{
     const html=`<div class="product-container">
@@ -21,7 +22,7 @@ products.forEach((item)=>{
           </div>
 
           <div class="product-price">
-            $${item.priceCents/100}
+            $${formatCurrency(item.priceCents)}
           </div>
 
           <div class="product-quantity-container">
