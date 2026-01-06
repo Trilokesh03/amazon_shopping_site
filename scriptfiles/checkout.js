@@ -2,8 +2,19 @@ import {cart,removeProduct} from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/convertmoney.js';
 
+function cartSize(){
+    let total=0;
+    cart.forEach((item)=>{total+=item.count});
+    const checkoutElement=document.querySelector('.js-checkout-quantity');
+    if(total===0)
+        checkoutElement.textContent='';
+    else
+        checkoutElement.textContent=`${total} items`;
+}
+
 let cartHTML='';
 cart.forEach((cartitem)=>{
+
     const prdtId=cartitem.prdtId;
 
     let matchingProduct;
@@ -34,8 +45,9 @@ cart.forEach((cartitem)=>{
                 <span>
                 Quantity: <span class="quantity-label">${cartitem.count}</span>
                 </span>
-                <span class="update-quantity-link link-primary">
-                Update
+                <span class="update-quantity-link link-primary " >
+                <span class="js-update-link js-update-button-${matchingProduct.id}" data-product-id=${matchingProduct.id}>Update</span> 
+                <span class="hide js-update-input-${matchingProduct.id}"></span>
                 </span>
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id=${matchingProduct.id}>
                 Delete
@@ -92,12 +104,24 @@ cart.forEach((cartitem)=>{
     cartHTML+=cart_singleitem_HTML;
 });
 document.querySelector('.js-order-summary').innerHTML=cartHTML;
+cartSize();
 
 document.querySelectorAll('.js-delete-link').forEach((deletelink)=>{
     deletelink.addEventListener('click',()=>{
+
         const deleteId=deletelink.dataset.productId;
         removeProduct(deleteId);
+        cartSize();
         document.querySelector(`.js-cart-item-container-${deleteId}`).remove();
-        console.log(cart);
+        
     });
 });
+
+document.querySelectorAll('.js-update-link').forEach((item)=>{
+    item.addEventListener('click',()=>{
+        const updateId=item.dataset.productId;
+        document.querySelector(`.js-update-input-${updateId}`).innerHTML='<input type="number"> <button>save</button> ';
+        //document.querySelector(`.js-update-button-${updateId}`).classList.toggle('hide');
+        //document.querySelector(`.js-update-input-${updateId}`).classList.toggle('hide');
+    })
+})
