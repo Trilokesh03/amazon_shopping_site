@@ -25,9 +25,10 @@ export function addtocart(prdtId){
       else{
         cart.push(
         {prdtId:prdtId,
-          count:1
+          count:1,
+          deliveryTypeId:'1'
         }
-      )
+      );
       }
       saveToLocal();
 }
