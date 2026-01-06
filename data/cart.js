@@ -41,3 +41,12 @@ export function removeProduct(productId){
   cart=temp;
   saveToLocal();
 }
+export function changeDelivery(productId,deliveryId){
+  let ispresent;
+  cart.forEach((cartitem)=>{
+    if(productId===cartitem.prdtId)
+        ispresent=cartitem;
+  });
+  ispresent.deliveryTypeId=deliveryId;
+  saveToLocal();
+}
