@@ -7,7 +7,7 @@ describe('test suite:add to cart fn',()=>{
             return JSON.stringify([{
                 prdtId:'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
                 count:2,
-                deliveryTypeId:1
+                deliveryTypeId:'1'
             }]);
         });
         loadFromStorage();
