@@ -1,4 +1,4 @@
-import { formatCurrency } from "../scriptfiles/utils/convertmoney.js";
+import { formatCurrency } from "../../scriptfiles/utils/convertmoney.js";
 
 describe('test suite :formatCurrency',()=>{
     it('convert cent to dollar',()=>{
@@ -10,7 +10,5 @@ describe('test suite :formatCurrency',()=>{
     it('rounding off',()=>{
         expect(formatCurrency(2000.5)).toEqual('20.01');
     });
-    it('rounding off',()=>{
-        expect(formatCurrency(2000.5)).toEqual('20.00');
-    });
+    
 });
